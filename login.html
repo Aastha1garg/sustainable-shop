@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Login to Your Account</h2>
+        <input type="text" id="username" placeholder="Enter Username"><br>
+        <input type="password" id="password" placeholder="Enter Password"><br>
+        <button onclick="login()">Login</button>
+
+        <h3>Or Login with OTP</h3>
+        <input type="text" id="phone" placeholder="Enter Mobile Number"><br>
+        <button onclick="sendOTP()">Send OTP</button>
+        <input type="text" id="otp" placeholder="Enter OTP"><br>
+        <button onclick="verifyOTP()">Verify OTP</button>
+
+        <p>Don't have an account? <a href="register.html">Register Here</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

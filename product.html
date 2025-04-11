@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Friendly Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Sustainable Clothing Store</h1>
+        <a href="index.html">Home</a> | 
+        <a href="login.html">Login</a>
+    </header>
+
+    <h2>Our Sustainable Products</h2>
+    <input type="text" id="search" placeholder="Search for sustainable items..." oninput="searchProducts()">
+    
+    <div id="productList">
+        <!-- Products will be loaded dynamically -->
+    </div>
+
+    <script>
+        async function fetchProducts() {
+            let response = await fetch("http://localhost:5432/products");
+            let products = await response.json();
+
+            let productList = document.getElementById("productList");
+            productList.innerHTML = "";
+
+            products.forEach(product => {
+                let productCard = document.createElement("div");
+                productCard.className = "product-card";
+                productCard.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <strong>Price: ₹${product.price}</strong>
+                    <br><button>Add to Cart</button>
+                `;
+                productList.appendChild(productCard);
+            });
+        }
+
+        function searchProducts() {
+            let searchText = document.getElementById("search").value.toLowerCase();
+            let productCards = document.querySelectorAll(".product-card");
+
+            productCards.forEach(card => {
+                let title = card.querySelector("h3").innerText.toLowerCase();
+                if (title.includes(searchText)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        window.onload = fetchProducts;
+    </script>
+</body>
+</html>
